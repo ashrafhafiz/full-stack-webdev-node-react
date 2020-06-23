@@ -1,4 +1,6 @@
-﻿# Modified on Github site full-stack-webdev-node-react
+﻿# A Full Stack Web Development Project
+
+#### Node / Express / MongoDB / React
 
 # Now it is modified locally.
 
