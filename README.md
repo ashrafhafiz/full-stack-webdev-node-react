@@ -1,5 +1,7 @@
 ﻿# Modified on Github site full-stack-webdev-node-react
 
+# Now it is modified locally.
+
 ## Deployment Checklist
 
 ### 1. Dynamic Port Binding
