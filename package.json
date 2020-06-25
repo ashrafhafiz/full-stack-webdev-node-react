@@ -12,7 +12,7 @@
     "clean": "rm -rf dist && mkdir dist",
     "build-babel": "babel -d ./dist ./src -s",
     "build": "npm run clean && npm run build-babel",
-    "start": "npm run build && node ./build/index.js"
+    "start": "npm run build && node ./dist/index.js"
   },
   "keywords": [],
   "author": "Ashraf Hafiz <Ashraf.Hafiz@yahoo.com> (ahvlabs.*)",
