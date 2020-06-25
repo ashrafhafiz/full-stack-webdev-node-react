@@ -25,6 +25,7 @@ passport.use(
       consumerKey: TWITTER_CONSUMER_KEY,
       consumerSecret: TWITTER_CONSUMER_SECRET,
       callbackURL: "/auth/twitter/callback",
+      proxy: true,
     },
     (token, tokenSecret, profile, cb) => {
       User.findOne({ twitterId: profile.id }).then((existingUser) => {
