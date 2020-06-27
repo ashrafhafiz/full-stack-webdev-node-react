@@ -7,6 +7,17 @@ router.get(
   passport.authenticate("google", { scope: ["profile", "email"] })
 );
 
+router.get(
+  "/auth/google/callback",
+  passport.authenticate("google", { failureRedirect: "/" }),
+  (req, res) => {
+    // Successful authentication, redirect home.
+    res.redirect("/surveys");
+  }
+);
+
+export default router;
+
 // https://accounts.google.com/signin/oauth/oauthchooseaccount?response_type=code
 // & redirect_uri=http%3A%2F%2Flocalhost%3A5000%2Fauth%2Fgoogle%2Fcallback
 // & scope=profile%20email
@@ -14,13 +25,3 @@ router.get(
 // & o2v=2
 // & as=QW6J_S8o317YOsyVa4GgJw
 // & flowName=GeneralOAuthFlow
-router.get(
-  "/auth/google/callback",
-  passport.authenticate("google", { failureRedirect: "/login" }),
-  function (req, res) {
-    // Successful authentication, redirect home.
-    res.redirect("/api/currentuser");
-  }
-);
-
-export default router;

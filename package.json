@@ -8,11 +8,13 @@
     "npm": "6.8.0"
   },
   "scripts": {
-    "dev": "nodemon --exec babel-node src/index.js",
+    "server": "nodemon --exec babel-node src/index.js",
     "clean": "rm -rf dist && mkdir dist",
     "build-babel": "babel -d ./dist ./src -s",
     "build": "npm run clean && npm run build-babel",
-    "start": "npm run build && node ./dist/index.js"
+    "start": "npm run build && node ./dist/index.js",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "keywords": [],
   "author": "Ashraf Hafiz <Ashraf.Hafiz@yahoo.com> (ahvlabs.*)",
@@ -25,6 +27,7 @@
     "@babel/core": "^7.10.3",
     "@babel/node": "^7.10.3",
     "@babel/preset-env": "^7.10.3",
+    "concurrently": "^5.2.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",

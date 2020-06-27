@@ -5,6 +5,7 @@ import User from "../models/userModel";
 
 //
 // G O O G L E   A U T H E N T I C A T I O N
+// Code have be refactored to ES7 async/await
 //
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
@@ -13,10 +14,9 @@ passport.serializeUser((user, cb) => {
   cb(null, user.id);
 });
 
-passport.deserializeUser((id, cb) => {
-  User.findById(id).then((user) => {
-    cb(null, user);
-  });
+passport.deserializeUser(async (id, cb) => {
+  const user = await User.findById(id);
+  cb(null, user);
 });
 
 passport.use(
@@ -27,16 +27,16 @@ passport.use(
       callbackURL: "/auth/google/callback",
       proxy: true,
     },
-    (accessToken, refreshToken, profile, cb) => {
-      User.findOne({ googleId: profile.id }).then((existingUser) => {
-        if (existingUser) return cb(null, existingUser);
-        const newUser = new User({
-          googleId: profile.id,
-          name: profile.displayName,
-          email: profile.emails[0].value,
-        });
-        newUser.save().then((newUser) => cb(null, newUser));
-      });
+    async (accessToken, refreshToken, profile, cb) => {
+      const existingUser = await User.findOne({ googleId: profile.id });
+      if (existingUser) return cb(null, existingUser);
+      const newUser = await new User({
+        googleId: profile.id,
+        name: profile.displayName,
+        email: profile.emails[0].value,
+      }).save();
+      cb(null, newUser);
+
       // User.findOrCreate({ googleId: profile.id }, (err, user) => {
       //   return cb(err, user);
       // });

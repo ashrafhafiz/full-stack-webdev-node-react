@@ -59,6 +59,21 @@ app.use(googleAuthRouters, twitterAuthRouters);
 // app.use(googleAuthRouters);
 // app.use(twitterAuthRouters);
 
+// Defining CORS
+// app.use(function (req, res, next) {
+//   res.setHeader(
+//     "Access-Control-Allow-Headers",
+//     "X-Requested-With,content-type"
+//   );
+//   res.setHeader("Access-Control-Allow-Origin", "*");
+//   res.setHeader(
+//     "Access-Control-Allow-Methods",
+//     "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+//   );
+//   res.setHeader("Access-Control-Allow-Credentials", true);
+//   next();
+// });
+
 app.get("/", (req, res) => {
   res.send({ Hi: "There to main screen." });
 });
@@ -69,9 +84,9 @@ app.get("/api/logout", (req, res) => {
 });
 
 app.get("/api/currentuser", (req, res) => {
-  console.log(req);
-  res.send(req.session);
-  // res.send({ user: req.user });
+  // console.log(req);
+  // res.send(req.session);
+  res.send(req.user);
 });
 
 const PORT = process.env.PORT || 5001;
