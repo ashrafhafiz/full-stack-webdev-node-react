@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import Payments from "./Payments";
 
 class Header extends Component {
   renderContent = () => {
@@ -27,25 +28,18 @@ class Header extends Component {
       default:
         return (
           <>
-            <li className="nav-item">
+            <li className="nav-item mx-3 font-weight-bold text-white my-auto">
+              Credits: {this.props.auth.credits}
+            </li>
+            <li className="nav-item mr-2">
+              <Payments />
+            </li>
+            <li className="nav-item mr-2">
               <a className="nav-link" href="/pricing">
                 Pricing
               </a>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/addcredit">
-                Add Credit
-              </a>
-            </li>
-            <li className="nav-item">
-              Credits <span class="badge badge-pill badge-danger">5</span>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/about">
-                About
-              </a>
-            </li>
-            <li className="nav-item">
+            <li className="nav-item mr-2">
               <a className="nav-link" href="/api/logout">
                 Logout
               </a>
@@ -55,6 +49,8 @@ class Header extends Component {
     }
   };
   render() {
+    console.log(this.props.auth);
+
     return (
       <div>
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -76,9 +72,12 @@ class Header extends Component {
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          <div className="collapse navbar-collapse" id="navbarColor01">
-            <ul className="navbar-nav mr-auto">{this.renderContent()}</ul>
-            <form className="form-inline my-2 my-lg-0">
+          <div
+            className="collapse navbar-collapse justify-content-between"
+            id="navbarColor01"
+          >
+            <ul className="navbar-nav ml-auto">{this.renderContent()}</ul>
+            {/* <form className="form-inline my-2 my-lg-0">
               <input
                 className="form-control mr-sm-2"
                 type="text"
@@ -87,7 +86,7 @@ class Header extends Component {
               <button className="btn btn-secondary my-2 my-sm-0" type="submit">
                 Search
               </button>
-            </form>
+            </form> */}
           </div>
         </nav>
       </div>

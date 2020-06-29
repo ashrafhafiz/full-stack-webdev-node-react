@@ -7,22 +7,13 @@ const Landing = () => {
       <div className="site-blocks-cover" style={{ overflow: "hidden" }}>
         <div className="container">
           <div className="row align-items-center justify-content-center">
-            <div
-              className="col-md-12 aos-init aos-animate"
-              style={{ position: "relative" }}
-              data-aos="fade-up"
-              data-aos-delay="200"
-            >
+            <div className="col-md-12" style={{ position: "relative" }}>
               <img
                 src={landingImg}
-                alt="Image"
+                alt="landing shape"
                 className="img-absolute bcimage"
               />
-              <div
-                className="row mb-4 aos-init aos-animate"
-                data-aos="fade-up"
-                data-aos-delay="200"
-              >
+              <div className="row mb-4">
                 <div className="col-lg-6 mr-auto">
                   <h1>Make Your Business More Profitable</h1>
                   <p className="mb-5">
@@ -31,7 +22,7 @@ const Landing = () => {
                     officia.
                   </p>
                   <div>
-                    <a href="#" className="btn btn-primary mr-2 mb-2">
+                    <a href="/" className="btn btn-primary mr-2 mb-2">
                       Get Started
                     </a>
                   </div>

@@ -1,11 +1,13 @@
 import express from "express";
 import session from "express-session";
 import "dotenv/config";
+import path from "path";
 import passport from "passport";
 import "./services/googlePassport";
 import "./services/twitterPassport";
 import googleAuthRouters from "./routes/googleAuthRoutes";
 import twitterAuthRouters from "./routes/twitterAuthRoutes";
+import apiRoutes from "./routes/apiRoutes";
 import mongoose from "mongoose";
 
 //
@@ -37,6 +39,9 @@ const app = express();
 const SESSION_SECRET = process.env.SESSION_SECRET;
 const COOKIE_MAX_AGE = 30 * 24 * 60 * 60 * 1000;
 
+//
+// M i d d l e w a r e
+//
 app.use(
   session({
     secret: SESSION_SECRET,
@@ -45,16 +50,17 @@ app.use(
     cookie: { maxAge: COOKIE_MAX_AGE },
   }),
   passport.initialize(),
-  passport.session()
+  passport.session(),
+  express.json()
 );
-// Combining multiple app.use statements in a single one.
+// Combining multiple app.use middleware statements in a single one.
 // app.use(passport.initialize());
 // app.use(passport.session());
 
 //
 // R o u t e s
 //
-app.use(googleAuthRouters, twitterAuthRouters);
+app.use(googleAuthRouters, twitterAuthRouters, apiRoutes);
 // Combining multiple app.use statements in a single one.
 // app.use(googleAuthRouters);
 // app.use(twitterAuthRouters);
@@ -77,17 +83,18 @@ app.use(googleAuthRouters, twitterAuthRouters);
 app.get("/", (req, res) => {
   res.send({ Hi: "There to main screen." });
 });
-//
-app.get("/api/logout", (req, res) => {
-  req.logout();
-  res.redirect("/");
-});
 
-app.get("/api/currentuser", (req, res) => {
-  // console.log(req);
-  // res.send(req.session);
-  res.send(req.user);
-});
+if (process.env.NODE_ENV === "production") {
+  // Express will serve up production assets
+  // like our main.js file, or main.css
+  app.use(express.static("client/build"));
+
+  // Express will serve up the index.html file
+  // if it doesn't recognize the route
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
 
 const PORT = process.env.PORT || 5001;
 

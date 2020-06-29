@@ -37,6 +37,11 @@ const userSchema = new Schema(
       type: "string",
       required: false,
     },
+    credits: {
+      type: "Number",
+      required: false,
+      default: 0,
+    },
   },
   { timestamps: true }
 );
