@@ -14,7 +14,8 @@
     "build": "npm run clean && npm run build-babel",
     "start": "npm run build && node ./dist/index.js",
     "client": "npm run start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "keywords": [],
   "author": "Ashraf Hafiz <Ashraf.Hafiz@yahoo.com> (ahvlabs.*)",
