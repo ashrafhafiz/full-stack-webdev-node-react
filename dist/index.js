@@ -89,9 +89,7 @@ app.use(_googleAuthRoutes["default"], _twitterAuthRoutes["default"], _apiRoutes[
 // });
 
 app.get("/", function (req, res) {
-  res.send({
-    Hi: "There to main screen."
-  });
+  res.sendFile(_path["default"].resolve(__dirname, "client", "build", "index.html"));
 });
 
 if (process.env.NODE_ENV === "production") {
