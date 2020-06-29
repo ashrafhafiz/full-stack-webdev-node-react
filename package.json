@@ -9,7 +9,7 @@
   },
   "scripts": {
     "server": "nodemon --exec babel-node src/index.js",
-    "clean": "rm -rf dist && mkdir dist",
+    "clean": "rm -r dist && mkdir dist",
     "build-babel": "babel -d ./dist ./src -s",
     "build": "npm run clean && npm run build-babel",
     "start": "npm run build && node ./dist/index.js",
@@ -27,6 +27,7 @@
     "@babel/cli": "^7.10.3",
     "@babel/core": "^7.10.3",
     "@babel/node": "^7.10.3",
+    "@babel/polyfill": "^7.10.1",
     "@babel/preset-env": "^7.10.3",
     "concurrently": "^5.2.0",
     "dotenv": "^8.2.0",

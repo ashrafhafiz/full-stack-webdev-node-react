@@ -1,6 +1,7 @@
+import "@babel/polyfill";
+import "dotenv/config";
 import express from "express";
 import session from "express-session";
-import "dotenv/config";
 import path from "path";
 import passport from "passport";
 import "./services/googlePassport";
